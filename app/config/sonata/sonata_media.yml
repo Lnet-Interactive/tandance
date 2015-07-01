@@ -93,7 +93,7 @@ sonata_media:
 
     pixlr:
         enabled:  true
-        referrer: Demo - Sonata Project
+#        referrer: Demo - Sonata Project
 
     resizer:
         simple:

@@ -1,14 +1,190 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{%- block sonata_page_html_tag -%}
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+<html {{ sonata_seo_html_attributes() }}>
+{% endblock %}
+{% block sonata_page_head %}
+    <head {{ sonata_seo_head_attributes() }}>
+
+        <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+        {{ sonata_seo_title() }}
+        {{ sonata_seo_metadatas() }}
+
+        {% block sonata_page_stylesheets %}
+            {% block page_stylesheets %} {# Deprecated block #}
+                {% for stylesheet in sonata_page.assets.stylesheets %}
+                    <link rel="stylesheet" href="{{ asset(stylesheet) }}" media="all">
+                {% endfor %}
+            {% endblock %}
+        {% endblock %}
+
+        {% block sonata_page_javascripts %}
+            {% block page_javascripts %} {# Deprecated block #}
+                <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+                <!--[if lt IE 9]>
+                <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+                <![endif]-->
+
+                {% for js in sonata_page.assets.javascripts %}
+                    <script src="{{ asset(js) }}"></script>
+                {% endfor %}
+            {% endblock %}
+
+        {% endblock %}
     </head>
+{% endblock %}
     <body>
-        {% block body %}{% endblock %}
-        {% block content %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block sonata_page_container %}
+            {% block content %}{% endblock %} {# Deprecated block #}
+        {% endblock %}
+
+        {% block sonata_page_asset_footer %}
+            {% block page_asset_footer %} {# Deprecated block #}
+                {% if page is defined %}
+                    {% if page.javascript is not empty %}
+                        <script>
+                            {{ page.javascript|raw }}
+                        </script>
+                    {% endif %}
+                    {% if page.stylesheet is not empty %}
+                        <style>
+                            {{ page.stylesheet|raw }}
+                        </style>
+                    {% endif %}
+                {% endif %}
+                {#
+                    These includes can be done only at this point as all blocks are loaded,
+                    Limition : this does not work if a global page is loaded from an ESI tag inside a container block
+                #}
+                {{ sonata_block_include_stylesheets('screen', app.request.basePath) }}
+                {{ sonata_block_include_javascripts('screen', app.request.basePath) }}
+            {% endblock %}
+        {% endblock %}
+        <script>
+            /* <![CDATA[ */
+            jQuery(document).ready(function($) {
+                'use strict';
+
+                //REVOLUTION SLIDE
+                var revapi;
+                revapi = jQuery('.tp-banner').revolution(
+                        {
+                            delay: 5000,
+                            startwidth: 1170,
+                            startheight: 500,
+                            hideThumbs: 10,
+                            fullWidth: "on",
+                            forceFullWidth: "on",
+                            navigationType: "none" // bullet, thumb, none
+                        });
+
+                $('.numbers-counter').waypoint(function() {
+                            // NUMBERS COUNTER START
+                            $('.numbers').data('countToOptions', {
+                                formatter: function(value, options) {
+                                    return value.toFixed(options.decimals).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+                                }
+                            });
+                            // start timer
+                            $('.timer').each(count);
+
+                            function count(options) {
+                                var $this = $(this);
+                                options = $.extend({}, options || {}, $this.data('countToOptions') || {});
+                                $this.countTo(options);
+                            } // NUMBERS COUNTER END
+                        },
+                        {offset: '70%'}
+                );
+
+                // PRETTYPHOTO LIGHTBOX START
+                if (jQuery().prettyPhoto) {
+                    piPrettyphoto();
+                }
+                function piPrettyphoto() {
+                    $("a[data-gal^='prettyPhoto']").prettyPhoto({social_tools: false});
+                }// PRETTYPHOTO LIGHTBOX END
+
+                //PORTFOLIO CAROUSEL
+                //	Responsive layout, resizing the items
+                $('#portfolio-carousel').carouFredSel({
+                    responsive: true,
+                    width: '100%',
+                    height: '100%',
+                    auto: false,
+                    scroll: 1,
+                    prev: '.c_prev_2',
+                    next: '.c_next_2',
+                    items: {
+                        width: 400,
+                        height: '100%',
+                        visible: {
+                            min: 1,
+                            max: 4
+                        }
+                    }
+
+                });
+
+                //  Testimonial carousel Responsive layout, resizing the items
+                $('#services-carousel').carouFredSel({
+                    responsive: true,
+                    width: '100%',
+                    auto: false,
+                    scroll: 1,
+                    prev: '.c_prev',
+                    next: '.c_next',
+                    swipe: {
+                        onMouse: true,
+                        onTouch: true
+                    },
+                    items: {
+                        width: 370,
+                        height: 'auto',
+                        visible: {
+                            min: 1,
+                            max: 3
+                        }
+                    }
+                });
+
+                //  Responsive layout, resizing the items
+                $('#testimonial-carousel').carouFredSel({
+                    responsive: true,
+                    width: '100%',
+                    auto: true,
+                    scroll: 1,
+                    swipe: {
+                        onMouse: true,
+                        onTouch: true
+                    },
+                    items: {
+                        width: 370,
+                        height: 'variable',
+                        visible: {
+                            min: 1,
+                            max: 1
+                        }
+                    }
+                });
+
+
+            });
+
+            /* ]]> */
+        </script>
+
+
+        <!-- monitoring:3e9fda56df2cdd3b039f189693ab7844fbb2d4f6 -->
     </body>
 </html>
+

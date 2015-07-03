@@ -48,46 +48,44 @@ sonata_page:
     assets:
         stylesheets:
             - assetic/sonata_front_css.css
+            - bundles/app/css/grid.css
+            - bundles/app/css/style.css
+            - bundles/app/css/darkblue.css
+            - bundles/app/css/responsive.css
+            - bundles/app/css/retina.css
+            - bundles/app/rs-plugin/css/settings.css
+            - bundles/app/rs-plugin/css/theme-settings.css
+            - bundles/app/css/prettyPhoto.css
+            - bundles/app/pixons/style.css
+            - bundles/app/iconsfont/iconsfont.css
+
 
         javascripts:
             - assetic/sonata_front_js.js
+            - bundles/app/js/jquery-1.9.1.js
+            - bundles/app/js/jquery-migrate-1.2.1.min.js
+            - bundles/app/js/jquery.placeholder.min.js
+            - bundles/app/js/modernizr.custom.js
+            - bundles/app/js/jquery.dlmenu.js
+            - bundles/app/js/waypoints.min.js
+            - bundles/app/rs-plugin/js/jquery.themepunch.plugins.min.js
+            - bundles/app/rs-plugin/js/jquery.themepunch.revolution.min.js
+            - bundles/app/js/jquery.stellar.min.js
+            - bundles/app/js/jquery.tweetscroll.js
+            - bundles/app/js/jquery.carouFredSel-6.2.1-packed.js
+            - bundles/app/js/jquery.countTo.js
+            - bundles/app/js/jquery.prettyPhoto.js
+            - bundles/app/js/nicescroll.min.js
+            - bundles/app/js/include.js
+            - bundles/app/js/retina-1.1.0.min.js
+
 
     default_template: default
     templates:
         default:
-            path: 'AppBundle::demo_layout.html.twig'
+            path: 'AppBundle::layout.html.twig'
             name: 'default'
-            containers:
-                 header:
-                     name: Header
-                     blocks:
-                        - sonata.block.service.text
-                 content_top:
-                     name: Top content
-                 content:
-                     name: Main content
-                 content_bottom:
-                     name: Bottom content
-                 footer:
-                     name: Footer
-            matrix:
-                 layout: |
-                     HHHHHHHH
-                     TTTTTTTT
-                     CCCCCCCC
-                     BBBBBBBB
-                     FFFFFFFF
 
-                 mapping:
-                     H: header
-                     T: content_top
-                     C: content
-                     B: content_bottom
-                     F: footer
-
-        2columns:
-            path: 'AppBundle::demo_2columns_layout.html.twig'
-            name: '2 columns layout'
             containers:
                  header:
                      name: Header

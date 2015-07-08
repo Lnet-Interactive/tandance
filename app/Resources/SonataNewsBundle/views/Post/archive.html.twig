@@ -1,0 +1,136 @@
+
+{% block sonata_page_breadcrumb %}
+    <section id="page-title" class="page-title-1" data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="row">
+                <div class="grid_8">
+                    <div class="pt-title triggerAnimation animated" data-animate="fadeInLeft">
+                        <h1>We bring you <span class="strong">fresh news</span> <br />
+                            on web design industry on daily basis.</h1>
+                    </div>
+                </div><!-- .grid_6 end -->
+
+                <!-- .grid_6 start -->
+                <div class="grid_4">
+                    <div class="pt-image-container">
+                        <div class="pt-image triggerAnimation animated" data-animate="fadeInRight">
+                            <img src="{{ asset('bundles/app/img/page-titles/blog-page-title.png') }}" alt="blog image" />
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .row end -->
+
+            <div class="row">
+                <div class="grid_8">
+                    <div class="breadcrumbs triggerAnimation animated" data-animate="fadeInUp">
+                        <ul>
+                            <li>
+                                <span>You are here:</span>
+                            </li>
+
+                            <li>
+                                <a href="#">Blog </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .container end -->
+    </section>
+{% endblock %}
+
+<h1>{{ 'title_archive'|trans({}, 'SonataNewsBundle') }}</h1>
+
+
+<!-- .page-content start -->
+<section class="page-content">
+
+    {% for post in pager.getResults() %}
+        <!-- .container start -->
+        <div class="container">
+
+            <!-- .row start -->
+            <div class="row">
+
+                <!-- .grid_12.blog-posts start -->
+                <ul class="grid_12 blog-posts triggerAnimation animated" data-animate="fadeInLeft">
+
+                    <!-- .blog-post.format-standard start -->
+                    <li class="blog-post format-standard">
+                        <!-- .post-info start -->
+                        <ul class="post-info">
+                            <li class="post-date">
+                                <span>{{ post.publicationDateStart | format_date }}</span>
+
+                            </li>
+
+                            <li class="post-category">
+                                <i class="icon-image-2"></i>
+                            </li>
+                        </ul><!-- .post-info end -->
+
+                        <!-- .post-body start -->
+                        <article class="post-body">
+                            <a href="blogsingle.html">
+                                <h3><a href="{{ url('sonata_news_view', { 'permalink': sonata_news_permalink(post) }) }}">{{ post.title }}</a>
+                                </h3>
+                            </a>
+
+                            <ul class="post-meta">
+                                <li class="icon-clock">
+                                    <span>{{ post.publicationDateStart | format_date }} |</span>
+                                </li>
+                                <li class="icon-user">
+                                    <span class="sonata-blog-post-author">{{ 'archive_author'|trans({'%author%': post.author }, 'SonataNewsBundle') }}</span> |
+                                </li>
+
+                                <li class="icon-comments">
+                                    <span class="sonata-blog-post-comments-count">{{ 'comments_count'|trans({'%comments_count%': post.commentsCount }, 'SonataNewsBundle') }}</span>
+                                </li>
+
+                                <li>
+                                    {% if post.tags|length > 1 %}
+                                        <i class="icon-tags"></i>
+                                    {% else %}
+                                        <i class="icon-tag"></i>
+                                    {% endif %}
+                                    {{ 'published_under'|transchoice(post.tags|length, {}, 'SonataNewsBundle') }}
+
+                                    {% for tag in post.tags %}
+                                        <a href="{{ url('sonata_news_tag', { 'tag': tag.slug } ) }}">{{ tag.name }}</a>{% if not loop.last %},{% endif %}
+                                    {% endfor %}
+                                </li><!-- .post-tags end -->
+                            </ul><!-- .post-meta end -->
+                            <div class="sonata-blog-post-abtract">
+                                {{ post.abstract }}
+                            </div>
+                            <blockquote>
+                                <p>
+                                    Beautiful design, clean code and fast
+                                    support. I really couldn’t wish for more.
+                                    Really great job guys! Looking for more
+                                    cool themes from you.
+
+                                    <cite>- MbCreatives, business.com</cite>
+                                </p>
+                            </blockquote>
+
+
+                        </article><!-- .post-body end -->
+                    </li><!-- .blog-post.format-standard end -->
+                </ul><!-- .grid_12.blog-posts end -->
+
+            </div><!-- .row end -->
+
+        </div><!-- .container end -->
+        <hr />
+    {% else %}
+        {{ 'no_post_found'|trans({}, 'SonataNewsBundle') }}
+    {% endfor %}
+
+    <ul class="pager">
+        <li{% if pager.page == pager.lastPage %} class="disabled"{% endif %}><a href="{{ url(route, route_parameters|merge({'page': pager.nextpage})) }}" title="{{ 'link_previous_page'|trans({}, 'SonataNewsBundle') }}">{{ 'link_previous_page'|trans({}, 'SonataNewsBundle') }}</a>
+        <li{% if pager.page == pager.firstPage %} class="disabled"{% endif %}><a href="{{ url(route, route_parameters|merge({'page': pager.previouspage})) }}" title="{{ 'link_next_page'|trans({}, 'SonataNewsBundle') }}">{{ 'link_next_page'|trans({}, 'SonataNewsBundle') }}</a></li>
+    </ul>
+</section><!-- .page-content end -->

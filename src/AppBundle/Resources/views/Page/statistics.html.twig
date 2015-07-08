@@ -8,7 +8,7 @@
                     <!-- slide 2 start -->
                     <li data-transition="fade" data-slotamount="15" data-masterspeed="1500">
                         <!-- main image -->
-                        <img src="img/slider/slide-1-1.jpg" alt="slidebg3" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat" />
+                        <img src="{{ asset('bundles/app/img/slider/slide-1-1.jpg') }}" alt="slidebg3" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat" />
 
                         <!-- layer 1 -->
                         <div class="tp-caption regular lft"
@@ -27,7 +27,7 @@
                              data-speed="600"
                              data-start="1500"
                              data-easing="Back.easeOut"
-                             data-endspeed="300"><img src='img/slider/slide-1-2.png' alt='mobile devices'/>
+                             data-endspeed="300"><img src='{{ asset('bundles/app/img/slider/slide-1-2.png') }}' alt='mobile devices'/>
                         </div>
 
                         <!-- layer 3 -->
@@ -94,7 +94,7 @@
                     <!-- slide 2 start -->
                     <li data-transition="fade" data-slotamount="7" data-masterspeed="1500">
                         <!-- main image -->
-                        <img src="img/slider/slide-3-1.jpg" alt="slidebg1" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat" />
+                        <img src="{{ asset('bundles/app/img/slider/slide-3-1.jpg') }}" alt="slidebg1" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat" />
 
                         <!-- layer 1 -->
                         <div class="tp-caption background lft"
@@ -120,7 +120,7 @@
                     <!-- slide 3 start -->
                     <li data-transition="fade" data-slotamount="7" data-masterspeed="1500">
                         <!-- main image -->
-                        <img src="img/slider/slide-2-1.jpg" alt="slidebg2" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat" />
+                        <img src="{{ asset('bundles/app/img/slider/slide-2-1.jpg') }}" alt="slidebg2" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat" />
 
                         <!-- layer 1 -->
                         <div class="tp-caption regular lft"
@@ -149,7 +149,7 @@
                              data-speed="600"
                              data-start="1500"
                              data-easing="Back.easeOut"
-                             data-endspeed="300"><img src='img/slider/slide-2-2.png' alt='slider image'/>
+                             data-endspeed="300"><img src='{{ asset('bundles/app/img/slider/slide-2-2.png') }}' alt='slider image'/>
                         </div>
 
                         <!-- layer 4 -->
@@ -425,7 +425,7 @@
                     <div class="triggerAnimation animated" data-animate="fadeInLeft">
                         <section class="process-box">
                             <div class="img-container">
-                                <img src="{{ ('bundles/app/img/pictures/development-1.png') }}" alt="creative thinking"/>
+                                <img src="{{ asset('bundles/app/img/pictures/development-1.png') }}" alt="creative thinking"/>
                             </div>
 
                             <h5>Creative thinking</h5>
@@ -442,7 +442,7 @@
                     <div class="triggerAnimation animated" data-animate="fadeInUp">
                         <section class="process-box">
                             <div class="img-container">
-                                <img src="{{ ('bundles/app/img/pictures/development-2.png') }}" alt="creative thinking"/>
+                                <img src="{{ asset('bundles/app/img/pictures/development-2.png') }}" alt="creative thinking"/>
                             </div>
 
                             <h5>Put it in Action</h5>
@@ -502,7 +502,7 @@
 
                                     <ul>
                                         <li class="portfolio-zoom">
-                                            <a href="{{ ('bundles/app/img/portfolio/cols/portfolio-1.jpg') }}"
+                                            <a href="{{ asset('bundles/app/img/portfolio/cols/portfolio-1.jpg') }}"
                                                data-gal="prettyPhoto[pp_gallery]" class="icon-expand-2"></a>
                                         </li>
 
@@ -525,7 +525,7 @@
 
                         <figure class="portfolio-img-container">
                             <div class="portfolio-img">
-                                <img src="{{ ('bundles/app/img/portfolio/cols/portfolio-2.jpg') }}" alt="portfolio image"/>
+                                <img src="{{ asset('bundles/app/img/portfolio/cols/portfolio-2.jpg') }}" alt="portfolio image"/>
 
                                 <div class="portfolio-img-hover">
                                     <div class="mask"></div>
@@ -555,7 +555,7 @@
 
                         <figure class="portfolio-img-container">
                             <div class="portfolio-img">
-                                <img src="{{ ('bundles/app/img/portfolio/cols/portfolio-3.jpg') }}" alt="portfolio image"/>
+                                <img src="{{ asset('bundles/app/img/portfolio/cols/portfolio-3.jpg') }}" alt="portfolio image"/>
 
                                 <div class="portfolio-img-hover">
                                     <div class="mask"></div>
@@ -585,7 +585,7 @@
 
                         <figure class="portfolio-img-container">
                             <div class="portfolio-img">
-                                <img src="{{ ('bundles/app/img/portfolio/cols/portfolio-4.jpg') }}" alt="portfolio image"/>
+                                <img src="{{ asset('bundles/app/img/portfolio/cols/portfolio-4.jpg') }}" alt="portfolio image"/>
 
                                 <div class="portfolio-img-hover">
                                     <div class="mask"></div>
@@ -652,7 +652,7 @@
 
                                     <ul>
                                         <li class="portfolio-zoom">
-                                            <a href="{{ ('bundles/app/img/portfolio/cols/portfolio-6.jpg') }}"
+                                            <a href="{{ asset('bundles/app/img/portfolio/cols/portfolio-6.jpg') }}"
                                                data-gal="prettyPhoto[pp_gallery]" class="icon-expand-2"></a>
                                         </li>
 
@@ -711,9 +711,120 @@
 
                 <article class="grid_4">
                     <div class="triggerAnimation animated" data-animate='fadeInUp'>
-                        <img src='{{ ('bundles/app/img/pictures/services-retina.png') }}' alt='iphone'/>
+                        <img src='{{ asset('bundles/app/img/pictures/services-retina.png') }}' alt='iphone'/>
                     </div><!-- .triggerAnimation.animated end -->
                 </article><!-- .grid_4 end -->
             </div><!-- .row end -->
         </div><!-- .container end -->
     </section><!-- .page-content.parallax end -->
+    <script>
+        /* <![CDATA[ */
+
+        jQuery(document).ready(function($) {
+            'use strict';
+
+            //REVOLUTION SLIDE
+            var revapi;
+            revapi = jQuery('.tp-banner').revolution(
+                    {
+                        delay: 5000,
+                        startwidth: 1170,
+                        startheight: 500,
+                        hideThumbs: 10,
+                        fullWidth: "on",
+                        forceFullWidth: "on",
+                        navigationType: "none" // bullet, thumb, none
+                    });
+
+            $('.numbers-counter').waypoint(function() {
+                        // NUMBERS COUNTER START
+                        $('.numbers').data('countToOptions', {
+                            formatter: function(value, options) {
+                                return value.toFixed(options.decimals).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+                            }
+                        });
+                        // start timer
+                        $('.timer').each(count);
+
+                        function count(options) {
+                            var $this = $(this);
+                            options = $.extend({}, options || {}, $this.data('countToOptions') || {});
+                            $this.countTo(options);
+                        } // NUMBERS COUNTER END
+                    },
+                    {offset: '70%'}
+            );
+
+            // PRETTYPHOTO LIGHTBOX START
+            if (jQuery().prettyPhoto) {
+                piPrettyphoto();
+            }
+            function piPrettyphoto() {
+                $("a[data-gal^='prettyPhoto']").prettyPhoto({social_tools: false});
+            }// PRETTYPHOTO LIGHTBOX END
+
+            //PORTFOLIO CAROUSEL
+            //	Responsive layout, resizing the items
+            $('#portfolio-carousel').carouFredSel({
+                responsive: true,
+                width: '100%',
+                height: '100%',
+                auto: false,
+                scroll: 1,
+                prev: '.c_prev_2',
+                next: '.c_next_2',
+                items: {
+                    width: 400,
+                    height: '100%',
+                    visible: {
+                        min: 1,
+                        max: 4
+                    }
+                }
+            });
+
+            //  Testimonial carousel Responsive layout, resizing the items
+            $('#services-carousel').carouFredSel({
+                responsive: true,
+                width: '100%',
+                auto: false,
+                scroll: 1,
+                prev: '.c_prev',
+                next: '.c_next',
+                swipe: {
+                    onMouse: true,
+                    onTouch: true
+                },
+                items: {
+                    width: 370,
+                    height: 'auto',
+                    visible: {
+                        min: 1,
+                        max: 3
+                    }
+                }
+            });
+
+            //  Responsive layout, resizing the items
+            $('#testimonial-carousel').carouFredSel({
+                responsive: true,
+                width: '100%',
+                auto: true,
+                scroll: 1,
+                swipe: {
+                    onMouse: true,
+                    onTouch: true
+                },
+                items: {
+                    width: 370,
+                    height: 'auto',
+                    visible: {
+                        min: 1,
+                        max: 1
+                    }
+                }
+            });
+        });
+
+        /* ]]> */
+    </script>

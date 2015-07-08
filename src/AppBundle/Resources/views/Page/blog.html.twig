@@ -1,6 +1,50 @@
 
+    {% block sonata_page_breadcrumb %}
+        <section id="page-title" class="page-title-1" data-stellar-background-ratio="0.5">
+            <div class="container">
+                <div class="row">
+                    <div class="grid_8">
+                        <div class="pt-title triggerAnimation animated" data-animate="fadeInLeft">
+                            <h1>We bring you <span class="strong">fresh news</span> <br />
+                                on web design industry on daily basis.</h1>
+                        </div>
+                    </div><!-- .grid_6 end -->
 
-    <!-- #page-title start -->
+                    <!-- .grid_6 start -->
+                    <div class="grid_4">
+                        <div class="pt-image-container">
+                            <div class="pt-image triggerAnimation animated" data-animate="fadeInRight">
+                                <img src="{{ asset('bundles/app/img/page-titles/blog-page-title.png') }}" alt="blog image" />
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- .row end -->
+
+                <div class="row">
+                    <div class="grid_8">
+                        <div class="breadcrumbs triggerAnimation animated" data-animate="fadeInUp">
+                            <ul>
+                                <li>
+                                    <span>You are here:</span>
+                                </li>
+
+                                <li>
+                                    <a href="#">Blog </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .container end -->
+        </section>
+    {% endblock %}
+
+    <h1>{{ 'title_archive'|trans({}, 'SonataNewsBundle') }}</h1>
+
+
+
+<!-- #page-title start -->
     <section id="page-title" class="page-title-1" data-stellar-background-ratio="0.5">
         <div class="container">
             <div class="row">
@@ -43,6 +87,7 @@
     <!-- .page-content start -->
     <section class="page-content">
 
+    {% for post in pager.getResults() %}
     <!-- .container start -->
     <div class="container">
 
@@ -56,7 +101,7 @@
     <li class="blog-post format-standard">
     <div class="post-media-container">
         <a href="blogsingle.html">
-            <img src="{{ ('bundles/app/img/blog/blog-1.jpg') }}" alt="standard blog post with image" />
+            <img src="{{ asset('bundles/app/img/blog/blog-1.jpg') }}" alt="standard blog post with image" />
         </a>
 
         <div class="post-media-hover">
@@ -79,28 +124,33 @@
     <!-- .post-body start -->
     <article class="post-body">
     <a href="blogsingle.html">
-        <h3>Standard image blog post</h3>
+        <h3><a href="{{ url('sonata_news_view', { 'permalink': sonata_news_permalink(post) }) }}">{{ post.title }}</a>
+        </h3>
     </a>
 
     <ul class="post-meta">
         <li class="icon-clock">
-            <span>Dec 27, 2013</span>
+            <span>{{ post.publicationDateStart | format_date }} |</span>
         </li>
         <li class="icon-user">
-            <a href="#">Admin</a>
+            <span class="sonata-blog-post-author">{{ 'archive_author'|trans({'%author%': post.author }, 'SonataNewsBundle') }}</span> |
         </li>
 
         <li class="icon-comments">
-            <a href="blogsingle.html">5</a>
+            <span class="sonata-blog-post-comments-count">{{ 'comments_count'|trans({'%comments_count%': post.commentsCount }, 'SonataNewsBundle') }}</span>
         </li>
 
         <li class="post-tags icon-tags">
-            <a href="#">responsive, </a>
-            <a href="#">image, </a>
-            <a href="#">standard, </a>
-            <a href="#">gallery,</a>
-            <a href="#">photography,</a>
-            <a href="#">web design</a>
+            {% if post.tags|length > 1 %}
+                <i class="icon-tags"></i>
+            {% else %}
+                <i class="icon-tag"></i>
+            {% endif %}
+            {{ 'published_under'|transchoice(post.tags|length, {}, 'SonataNewsBundle') }}
+
+            {% for tag in post.tags %}
+                <a href="{{ url('sonata_news_tag', { 'tag': tag.slug } ) }}">{{ tag.name }}</a>{% if not loop.last %},{% endif %}
+            {% endfor %}
         </li><!-- .post-tags end -->
     </ul><!-- .post-meta end -->
 
@@ -138,226 +188,23 @@
         </p>
     </blockquote>
 
-    <p>
-        Phasellus tristique libero vel justo aliquam
-        pellentesque. Maecenas vestibulum velit est,
-        in tincidunt arcu fermentum id. Morbi ipsum
-        arcu, iaculis nec sapien vel, egestas
-        viverra eros. Phasellus ac dolor elit.
-        Donec nisl tellus, posuere in commodo ac,
-        placerat a elit. Nulla fringilla venenatis
-        metus, sed laoreet nisi varius non. Nunc
-        placerat tempor orci id mattis. Suspendisse
-        pulvinar nisl neque, rutrum pellentesque
-        neque commodo non. Maecenas ultrices tortor
-        sit amet suscipit tempor. Aenean et nunc
-        pharetra, pulvinar nibh sed, mattis urna.
-        Morbi vel lectus convallis, tristique mi
-        non, feugiat eros. Praesent fermentum odio
-        et egestas condimentum.
-    </p>
 
-    <!-- .share-post start -->
-    <article class="share-post">
-        <span>Share this post:</span>
-        <div id="shareme" data-url="http://pixel-industry.com/"></div>
-    </article><!-- share-post end -->
-
-    <!-- .post-author start -->
-    <article class="post-author">
-        <h4>About the Author</h4>
-
-        <div class="img-container">
-            <img src="{{ asset('bundles/app/img/blog/user.jpg') }}" alt="post author" />
-        </div>
-
-        <div class="info">
-            <a href="#">
-                <h6>Tara Stark</h6>
-            </a>
-            <span class="member">Premium Member</span>
-
-            <p>
-                Voulpat dolor sit amet, consectetuer
-                adipiscing elit. Sed diam nonummy nibh
-                euismod tincidunt ut laoreet dolore magna
-                aliquam erat volutpat.
-            </p>
-        </div>
-    </article><!-- .post-author end -->
-
-    <!-- .post-comments start -->
-    <article class="post-comments">
-        <h4>Comments</h4>
-
-        <!-- comments-li start -->
-        <ul class="comments-li">
-            <li>
-                <article class="comment">
-                    <div class="avatar">
-                        <img src="{{ ('bundles/app/img/blog/user.jpg') }}" alt="author" />
-                    </div>
-
-                    <ul class="comment-meta">
-                        <li>
-                            <a href="#" class="author">Tara Stark</a>
-                        </li>
-
-                        <li>
-                            December 09th, 2013 at 11:05 am
-                        </li>
-                    </ul>
-
-                    <div class="comment-body">
-                        <p>
-                            Lorem ipsum dolor sit amet, onsectetuer
-                            dipiscing elit, sed diam nonummy nibh
-                            euismod tincidunt ut laoreet dolore
-                            magna aliquam erat volutpat.
-                        </p>
-
-                        <a class="comment-reply-link">
-                            Reply
-                        </a>
-                    </div>
-                </article><!-- comment end -->
-
-                <!-- second level comment -->
-                <ul class="children">
-                    <li>
-                        <article class="comment">
-                            <div class="avatar">
-                                <img src="{{ ('bundles/app/img/blog/avatar.png') }}" alt="author" />
-                            </div>
-
-                            <ul class="comment-meta">
-                                <li>
-                                    <a href="#" class="author">Peter Mathewson</a>
-                                </li>
-
-                                <li>
-                                    December 06th, 2013 at 10:01 am
-                                </li>
-                            </ul>
-
-                            <div class="comment-body">
-                                <p>
-                                    Lorem ipsum dolor sit amet,
-                                    consectetuer adipiscing elit,
-                                    sed diam nonummy nibh
-                                    euismod tincidunt ut laoreet
-                                    dolore magna aliquam erat
-                                    volutpat.
-                                </p>
-
-                                <a class="comment-reply-link">
-                                    Reply
-                                </a>
-                            </div>
-                        </article><!-- .comment end -->
-
-                        <!-- second level comment -->
-                        <ul class="children">
-                            <li>
-                                <article class="comment">
-                                    <div class="avatar">
-                                        <img src="{{ ('bundles/app/img/blog/user.jpg') }}" alt="author" />
-                                    </div>
-
-                                    <ul class="comment-meta">
-                                        <li>
-                                            <a href="#" class="author">Tara Stark</a>
-                                        </li>
-
-                                        <li>
-                                            November 29th, 2013 at 08:16 pm
-                                        </li>
-                                    </ul>
-
-                                    <div class="comment-body">
-                                        <p>
-                                            Lorem ipsum dolor sit amet,
-                                            consectetuer adipiscing elit,
-                                            sed diam nonummy nibh
-                                            euismod tincidunt ut laoreet
-                                            dolore magna aliquam erat
-                                            volutpat.
-                                        </p>
-
-                                        <a class="comment-reply-link">
-                                            Reply
-                                        </a>
-                                    </div>
-                                </article><!-- .comment end -->
-                            </li><!-- li end -->
-                        </ul><!-- .children end -->
-                    </li><!-- li end -->
-                </ul><!-- children end -->
-            </li><!-- post comments list item end -->
-
-            <li>
-                <article class="comment">
-                    <div class="avatar">
-                        <img src="{{ ('bundles/app/img/blog/avatar.png') }}" alt="author" />
-                    </div>
-
-                    <ul class="comment-meta">
-                        <li>
-                            <a href="#" class="author">pixel-industry</a>
-                        </li>
-
-                        <li>
-                            November 15th, 2013 at 02:56 pm
-                        </li>
-                    </ul>
-
-                    <div class="comment-body">
-                        <p>
-                            Lorem ipsum dolor sit amet, onsectetuer
-                            dipiscing elit, sed diam nonummy nibh
-                            euismod tincidunt ut laoreet dolore
-                            magna aliquam erat volutpat.
-                        </p>
-
-                        <a class="comment-reply-link">
-                            Reply
-                        </a>
-                    </div>
-                </article><!-- .comment end -->
-            </li><!-- li end -->
-        </ul><!-- comments-li end -->
-    </article><!-- .post-comments end -->
-
-    <!-- .comment-form start -->
-    <section class="comment-form">
-        <div id="respond">
-            <h5>Leave a comment</h5>
-
-            <form id="commentform">
-                <fieldset class="name-container">
-                    <label><span class="text-red">*</span> Name:</label>
-                    <input name="author" id="comment-name" type="text">
-                </fieldset>
-
-                <fieldset class="email-container">
-                    <label><span class="text-red">*</span> Email:</label>
-                    <input name="email" id="comment-email" type="email">
-                </fieldset>
-
-                <fieldset class="message">
-                    <label><span class="text-red">*</span> Message:</label>
-                    <textarea name="comment" id="comment-message" rows="8"></textarea>
-                </fieldset>
-                <input id="comment-reply" type="submit" value="Submit">
-
-            </form>
-            <div id="comment-response"></div>
-        </div><!-- 3respond end -->
-    </section><!-- .comment-form end -->
     </article><!-- .post-body end -->
     </li><!-- .blog-post.format-standard end -->
     </ul><!-- .grid_12.blog-posts end -->
 
     </div><!-- .row end -->
+        <div class="sonata-blog-post-abtract">
+            {{ post.abstract }}
+        </div>
     </div><!-- .container end -->
+        <hr />
+    {% else %}
+        {{ 'no_post_found'|trans({}, 'SonataNewsBundle') }}
+    {% endfor %}
+
+    <ul class="pager">
+        <li{% if pager.page == pager.lastPage %} class="disabled"{% endif %}><a href="{{ url(route, route_parameters|merge({'page': pager.nextpage})) }}" title="{{ 'link_previous_page'|trans({}, 'SonataNewsBundle') }}">{{ 'link_previous_page'|trans({}, 'SonataNewsBundle') }}</a>
+        <li{% if pager.page == pager.firstPage %} class="disabled"{% endif %}><a href="{{ url(route, route_parameters|merge({'page': pager.previouspage})) }}" title="{{ 'link_next_page'|trans({}, 'SonataNewsBundle') }}">{{ 'link_next_page'|trans({}, 'SonataNewsBundle') }}</a></li>
+    </ul>
     </section><!-- .page-content end -->

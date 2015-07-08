@@ -78,6 +78,8 @@ sonata_page:
             - bundles/app/js/nicescroll.min.js
             - bundles/app/js/include.js
             - bundles/app/js/retina-1.1.0.min.js
+            - bundles/app/js/html5shiv.js
+            - bundles/app/js/selectivizr-min.js
 
 
     default_template: default
